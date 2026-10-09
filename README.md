@@ -49,3 +49,5 @@ The seed script creates the admin only if the email does not already exist. Chan
 - `GET /api/users?page=1&limit=10&search=...` — admin only.
 
 All protected endpoints require `Authorization: Bearer <token>`.
+
+http://localhost:4000/api/users?page=1&limit=10&sortBy=name&order=asc for get api 
