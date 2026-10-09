@@ -1,0 +1,12 @@
+import { Router } from "express";
+import { login, register, getCurrentUser } from "../controllers/auth.controller";
+import { validate } from "../middleware/validate";
+import { authenticate } from "../middleware/auth";
+import { loginSchema, registerSchema } from "../validation/auth.validation";
+import { loginRateLimiter } from "../middleware/rateLimiter";
+import { asyncHandler } from "../middleware/asyncHandler";
+const router = Router();
+router.post("/register", loginRateLimiter, validate(registerSchema), asyncHandler(register));
+router.post("/login", loginRateLimiter, validate(loginSchema), asyncHandler(login));
+router.get("/me", authenticate, asyncHandler(getCurrentUser));
+export default router;

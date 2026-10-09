@@ -1,0 +1,11 @@
+import { Router } from "express";
+import { listBooks, getBook, createBook, updateBook, deleteBook } from "../controllers/book.controller";
+import { authenticate } from "../middleware/auth";
+import { asyncHandler } from "../middleware/asyncHandler";
+const router = Router();
+router.get("/", asyncHandler(listBooks));
+router.get("/:id", asyncHandler(getBook));
+router.post("/", authenticate, asyncHandler(createBook));
+router.patch("/:id", authenticate, asyncHandler(updateBook));
+router.delete("/:id", authenticate, asyncHandler(deleteBook));
+export default router;
